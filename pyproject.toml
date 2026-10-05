@@ -1,6 +1,6 @@
 [project]
 name = "pyrig-openssf"
-version = "0.1.4"
+version = "0.1.9"
 description = "A pyrig plugin that integrates OpenSSF functionality."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -27,7 +27,6 @@ classifiers = [
 ]
 dependencies = [
   "pyrig>=18.95.6",
-  "pyrig-runtime>=3.24.8",
 ]
 
 [project.urls]
@@ -51,6 +50,7 @@ dev = [
   "prek>=0.5.4",
   "pyflakes>=4.0.1",
   "pyrig-opensource>=1.0.6",
+  "pyrig-plugin>=0.1.0",
   "pyrig-pypi>=3.20.52",
   "pytest>=9.1.1",
   "pytest-cov>=7.1.0",
@@ -80,7 +80,6 @@ root = "src"
 [tool.deptry.per_rule_ignores]
 DEP002 = [
   "pyrig",
-  "pyrig-runtime",
 ]
 
 [tool.pytest]
