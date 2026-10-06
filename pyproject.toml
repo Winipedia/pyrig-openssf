@@ -1,6 +1,6 @@
 [project]
 name = "pyrig-openssf"
-version = "0.1.9"
+version = "0.1.10"
 description = "A pyrig plugin that integrates OpenSSF functionality."
 readme = "README.md"
 requires-python = ">=3.12"
