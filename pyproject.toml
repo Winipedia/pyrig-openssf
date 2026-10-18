@@ -1,6 +1,6 @@
 [project]
 name = "pyrig-openssf"
-version = "0.1.33"
+version = "0.1.37"
 description = "A pyrig plugin that integrates OpenSSF functionality."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -120,6 +120,9 @@ select = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.ryl.lint]
+strict = true
 
 [tool.ryl.lint.rules]
 ALL = "enable"
