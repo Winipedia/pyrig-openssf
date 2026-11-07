@@ -1,7 +1,7 @@
 # pyrig-openssf
 
 <!-- project-status -->
-[![CI](https://img.shields.io/github/actions/workflow/status/Winipedia/pyrig-openssf/health_check.yml?label=CI&logo=github)](https://github.com/Winipedia/pyrig-openssf/actions/workflows/health_check.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/Winipedia/pyrig-openssf/health-check.yml?label=CI&logo=github)](https://github.com/Winipedia/pyrig-openssf/actions/workflows/health-check.yml)
 [![CD](https://img.shields.io/github/actions/workflow/status/Winipedia/pyrig-openssf/release.yml?label=CD&logo=github)](https://github.com/Winipedia/pyrig-openssf/actions/workflows/release.yml)
 [![ProjectTester](https://codecov.io/gh/Winipedia/pyrig-openssf/branch/main/graph/badge.svg)](https://codecov.io/gh/Winipedia/pyrig-openssf)
 <!-- code-quality -->
