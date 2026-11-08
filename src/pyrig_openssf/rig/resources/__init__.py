@@ -1,0 +1,1 @@
+"""Pinned GitHub Actions metadata."""
