@@ -5,6 +5,8 @@
 [![CD](https://img.shields.io/github/actions/workflow/status/Winipedia/pyrig-openssf/release.yml?label=CD&logo=github)](https://github.com/Winipedia/pyrig-openssf/actions/workflows/release.yml)
 [![ProjectTester](https://codecov.io/gh/Winipedia/pyrig-openssf/branch/main/graph/badge.svg)](https://codecov.io/gh/Winipedia/pyrig-openssf)
 [![SecurityPracticesChecker](https://api.scorecard.dev/projects/github.com/Winipedia/pyrig-openssf/badge)](https://scorecard.dev/viewer/?uri=github.com/Winipedia/pyrig-openssf)
+[![Best Practices](https://www.bestpractices.dev/en/projects?as=badge&url=https%3A%2F%2Fgithub.com%2FWinipedia%2Fpyrig-openssf)](https://www.bestpractices.dev/en/projects?as=entry&url=https%3A%2F%2Fgithub.com%2FWinipedia%2Fpyrig-openssf)
+[![Baseline](https://www.bestpractices.dev/en/projects?as=baseline&url=https%3A%2F%2Fgithub.com%2FWinipedia%2Fpyrig-openssf)](https://www.bestpractices.dev/en/projects?as=entry&url=https%3A%2F%2Fgithub.com%2FWinipedia%2Fpyrig-openssf)
 <!-- code-quality -->
 [![ByteOrderMarkerFormatter](https://img.shields.io/badge/BOM-fix--byte--order--marker-orange)](https://prek.j178.dev/reference/built-in-hooks/#fix-byte-order-marker)
 [![CICDLinter](https://img.shields.io/badge/CI/CD-actionlint-blue)](https://github.com/rhysd/actionlint)
