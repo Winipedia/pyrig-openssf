@@ -1,4 +1,4 @@
-"""Reusable Scorecard analysis and code-scanning alert gate."""
+"""Reusable security-practices analysis and code-scanning alert gate."""
 
 from collections.abc import Callable
 from pathlib import Path
@@ -8,15 +8,21 @@ from pyrig.rig.configs.base.workflow import WorkflowConfigFile
 from pyrig.rig.tools.version_control.remote.controller import RemoteVersionController
 
 from pyrig_openssf.rig import resources
+from pyrig_openssf.rig.tools.security.practices import SecurityPracticesChecker
 
 
-class ScorecardWorkflowConfigFile(WorkflowConfigFile):
+class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
     """Analyze repository practices and fail on open Scorecard alerts."""
 
     @override
     def jobs(self) -> tuple[Callable[[], dict[str, Any]], ...]:
         """Return the analysis and alert-gate job builders."""
         return (self.job_analyze, self.job_check_alerts)
+
+    @override
+    def stem(self) -> str:
+        """Return the workflow filename stem."""
+        return "security-practices"
 
     @override
     def workflow_triggers(self) -> dict[str, Any]:
@@ -42,7 +48,7 @@ class ScorecardWorkflowConfigFile(WorkflowConfigFile):
             timeout_minutes=30,
         )
 
-    def job_check_alerts_permissions(self) -> dict[str, Any]:
+    def job_check_alerts_permissions(self) -> dict[str, str]:
         """Grant read access to code-scanning alerts without OIDC."""
         return self.permission("security-events")
 
@@ -50,7 +56,7 @@ class ScorecardWorkflowConfigFile(WorkflowConfigFile):
         """Return the code-scanning alert check."""
         return [self.step_check_alerts()]
 
-    def job_analyze_permissions(self) -> dict[str, Any]:
+    def job_analyze_permissions(self) -> dict[str, str]:
         """Grant repository reads, SARIF upload, and publication signing."""
         return {
             **self.permission_contents(),
@@ -89,7 +95,7 @@ class ScorecardWorkflowConfigFile(WorkflowConfigFile):
             uses=self.action_scorecard(),
             with_={
                 "results_file": self.results_file().as_posix(),
-                "results_format": "sarif",
+                "results_format": self.results_format(),
                 "publish_results": True,
             },
         )
@@ -114,4 +120,8 @@ class ScorecardWorkflowConfigFile(WorkflowConfigFile):
 
     def results_file(self) -> Path:
         """Return the SARIF report path."""
-        return Path("scorecard.sarif")
+        return Path(f"{SecurityPracticesChecker.I.name()}.{self.results_format()}")
+
+    def results_format(self) -> str:
+        """Return the SARIF report format."""
+        return "sarif"

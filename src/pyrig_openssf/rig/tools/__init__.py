@@ -1,0 +1,1 @@
+"""OpenSSF tool metadata."""

@@ -7,26 +7,31 @@ from pyrig.rig.configs.version_control.remote.workflows.release import (
 from pyrig_openssf.rig.configs.version_control.remote.workflows.health_check import (
     HealthCheckWorkflowConfigFile,
 )
-from pyrig_openssf.rig.configs.version_control.remote.workflows.scorecard import (
-    ScorecardWorkflowConfigFile,
+from pyrig_openssf.rig.configs.version_control.remote.workflows.security_practices import (  # noqa: E501
+    SecurityPracticesWorkflowConfigFile,
 )
 
 
 class TestHealthCheckWorkflowConfigFile:
     """Test class."""
 
-    def test_job_scorecard(self) -> None:
+    def test_job_security_practices(self) -> None:
         """Test method."""
         workflow = HealthCheckWorkflowConfigFile.I
-        job = workflow.job_scorecard()
-        assert job["job_id"] == "scorecard"
-        assert job["uses"] == ScorecardWorkflowConfigFile.I.workflow_call_reference()
-        assert job["permissions"] == workflow.job_scorecard_permissions()
+        job = workflow.job_security_practices()
+        assert job["job_id"] == "security-practices"
+        assert (
+            job["uses"]
+            == SecurityPracticesWorkflowConfigFile.I.workflow_call_reference()
+        )
+        assert job["permissions"] == workflow.job_security_practices_permissions()
 
-    def test_job_scorecard_permissions(self) -> None:
+    def test_job_security_practices_permissions(self) -> None:
         """Test method."""
-        permissions = HealthCheckWorkflowConfigFile.I.job_scorecard_permissions()
-        assert permissions == ScorecardWorkflowConfigFile.I.used_permissions()
+        permissions = (
+            HealthCheckWorkflowConfigFile.I.job_security_practices_permissions()
+        )
+        assert permissions == SecurityPracticesWorkflowConfigFile.I.used_permissions()
         release_permissions = ReleaseWorkflowConfigFile.I.job_health_check_permissions()
         for name, level in permissions.items():
             assert release_permissions[name] == level
@@ -35,4 +40,4 @@ class TestHealthCheckWorkflowConfigFile:
         """Test method."""
         workflow = HealthCheckWorkflowConfigFile.I
         jobs = workflow.jobs_health_check()
-        assert workflow.job_scorecard in jobs
+        assert workflow.job_security_practices in jobs

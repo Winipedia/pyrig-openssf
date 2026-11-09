@@ -1,4 +1,4 @@
-"""Health check workflow extended with reusable Scorecard analysis."""
+"""Health check workflow extended with reusable security-practices analysis."""
 
 from collections.abc import Callable
 from typing import Any, override
@@ -7,28 +7,30 @@ from pyrig.rig.configs.version_control.remote.workflows.health_check import (
     HealthCheckWorkflowConfigFile as BaseHealthCheckWorkflowConfigFile,
 )
 
-from pyrig_openssf.rig.configs.version_control.remote.workflows.scorecard import (
-    ScorecardWorkflowConfigFile,
+from pyrig_openssf.rig.configs.version_control.remote.workflows.security_practices import (  # noqa: E501
+    SecurityPracticesWorkflowConfigFile,
 )
 
 
 class HealthCheckWorkflowConfigFile(BaseHealthCheckWorkflowConfigFile):
-    """Include Scorecard in the required health check result."""
+    """Include security-practices checks in the required health-check result."""
 
     @override
     def jobs_health_check(self) -> tuple[Callable[[], dict[str, Any]], ...]:
-        """Return the base health-check job builders followed by the Scorecard call."""
-        return (*super().jobs_health_check(), self.job_scorecard)
+        """Return base health-check jobs followed by security-practices analysis."""
+        return (*super().jobs_health_check(), self.job_security_practices)
 
-    def job_scorecard(self) -> dict[str, Any]:
-        """Call the reusable Scorecard workflow."""
+    def job_security_practices(self) -> dict[str, Any]:
+        """Call the reusable security-practices workflow."""
         return self.job(
-            self.job_scorecard,
-            uses=ScorecardWorkflowConfigFile.I.workflow_call_reference(),
-            permissions=self.job_scorecard_permissions(),
-            secrets=ScorecardWorkflowConfigFile.I.used_secrets_mapping() or None,
+            self.job_security_practices,
+            uses=SecurityPracticesWorkflowConfigFile.I.workflow_call_reference(),
+            permissions=self.job_security_practices_permissions() or None,
+            secrets=(
+                SecurityPracticesWorkflowConfigFile.I.used_secrets_mapping() or None
+            ),
         )
 
-    def job_scorecard_permissions(self) -> dict[str, Any]:
-        """Return the permissions required by the Scorecard workflow."""
-        return ScorecardWorkflowConfigFile.I.used_permissions()
+    def job_security_practices_permissions(self) -> dict[str, str]:
+        """Return the permissions required by the security-practices workflow."""
+        return SecurityPracticesWorkflowConfigFile.I.used_permissions()

@@ -4,6 +4,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/Winipedia/pyrig-openssf/health-check.yml?label=CI&logo=github)](https://github.com/Winipedia/pyrig-openssf/actions/workflows/health-check.yml)
 [![CD](https://img.shields.io/github/actions/workflow/status/Winipedia/pyrig-openssf/release.yml?label=CD&logo=github)](https://github.com/Winipedia/pyrig-openssf/actions/workflows/release.yml)
 [![ProjectTester](https://codecov.io/gh/Winipedia/pyrig-openssf/branch/main/graph/badge.svg)](https://codecov.io/gh/Winipedia/pyrig-openssf)
+[![SecurityPracticesChecker](https://api.scorecard.dev/projects/github.com/Winipedia/pyrig-openssf/badge)](https://scorecard.dev/viewer/?uri=github.com/Winipedia/pyrig-openssf)
 <!-- code-quality -->
 [![ByteOrderMarkerFormatter](https://img.shields.io/badge/BOM-fix--byte--order--marker-orange)](https://prek.j178.dev/reference/built-in-hooks/#fix-byte-order-marker)
 [![CICDLinter](https://img.shields.io/badge/CI/CD-actionlint-blue)](https://github.com/rhysd/actionlint)

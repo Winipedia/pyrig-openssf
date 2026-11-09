@@ -7,17 +7,17 @@ from pyrig.core.resources import resource_content
 from pyrig.core.strings import read_text_utf8
 
 from pyrig_openssf.rig import resources
-from pyrig_openssf.rig.configs.version_control.remote.workflows.scorecard import (
-    ScorecardWorkflowConfigFile,
+from pyrig_openssf.rig.configs.version_control.remote.workflows.security_practices import (  # noqa: E501
+    SecurityPracticesWorkflowConfigFile,
 )
 
 
-class TestScorecardWorkflowConfigFile:
-    """Test class."""
+class TestSecurityPracticesWorkflowConfigFile:
+    """Test security-practices workflow configuration."""
 
     def test_action_scorecard(self) -> None:
         """Test method."""
-        workflow = ScorecardWorkflowConfigFile.I
+        workflow = SecurityPracticesWorkflowConfigFile.I
         assert workflow.action_scorecard() == tuple(
             resource_content("ACTION_SCORECARD", resources).splitlines(),
         )
@@ -26,7 +26,7 @@ class TestScorecardWorkflowConfigFile:
 
     def test_action_upload_sarif(self) -> None:
         """Test method."""
-        workflow = ScorecardWorkflowConfigFile.I
+        workflow = SecurityPracticesWorkflowConfigFile.I
         assert workflow.action_upload_sarif() == tuple(
             resource_content("ACTION_UPLOAD_SARIF", resources).splitlines(),
         )
@@ -35,7 +35,7 @@ class TestScorecardWorkflowConfigFile:
 
     def test_job_analyze(self) -> None:
         """Test method."""
-        workflow = ScorecardWorkflowConfigFile.I
+        workflow = SecurityPracticesWorkflowConfigFile.I
         job = workflow.job_analyze()
         assert job["job_id"] == "analyze"
         assert job["runs-on"] == "ubuntu-latest"
@@ -49,7 +49,7 @@ class TestScorecardWorkflowConfigFile:
 
     def test_job_analyze_permissions(self) -> None:
         """Test method."""
-        assert ScorecardWorkflowConfigFile.I.job_analyze_permissions() == {
+        assert SecurityPracticesWorkflowConfigFile.I.job_analyze_permissions() == {
             "contents": "read",
             "actions": "read",
             "security-events": "write",
@@ -58,7 +58,7 @@ class TestScorecardWorkflowConfigFile:
 
     def test_job_check_alerts(self) -> None:
         """Test method."""
-        workflow = ScorecardWorkflowConfigFile.I
+        workflow = SecurityPracticesWorkflowConfigFile.I
         job = workflow.job_check_alerts()
         assert job["job_id"] == "check-alerts"
         assert job["needs"] == ["analyze"]
@@ -68,22 +68,32 @@ class TestScorecardWorkflowConfigFile:
 
     def test_job_check_alerts_permissions(self) -> None:
         """Test method."""
-        assert ScorecardWorkflowConfigFile.I.job_check_alerts_permissions() == {
+        assert SecurityPracticesWorkflowConfigFile.I.job_check_alerts_permissions() == {
             "security-events": "read",
         }
 
     def test_jobs(self) -> None:
         """Test method."""
-        workflow = ScorecardWorkflowConfigFile.I
+        workflow = SecurityPracticesWorkflowConfigFile.I
         assert workflow.jobs() == (workflow.job_analyze, workflow.job_check_alerts)
 
     def test_results_file(self) -> None:
         """Test method."""
-        assert ScorecardWorkflowConfigFile.I.results_file() == Path("scorecard.sarif")
+        assert SecurityPracticesWorkflowConfigFile.I.results_file() == Path(
+            "scorecard.sarif",
+        )
+
+    def test_results_format(self) -> None:
+        """Test method."""
+        assert SecurityPracticesWorkflowConfigFile.I.results_format() == "sarif"
+
+    def test_stem(self) -> None:
+        """Test method."""
+        assert SecurityPracticesWorkflowConfigFile.I.stem() == "security-practices"
 
     def test_step_analyze_scorecard(self) -> None:
         """Test method."""
-        workflow = ScorecardWorkflowConfigFile.I
+        workflow = SecurityPracticesWorkflowConfigFile.I
         assert workflow.step_analyze_scorecard()["with"] == {
             "results_file": "scorecard.sarif",
             "results_format": "sarif",
@@ -92,7 +102,7 @@ class TestScorecardWorkflowConfigFile:
 
     def test_step_check_alerts(self) -> None:
         """Test method."""
-        step = ScorecardWorkflowConfigFile.I.step_check_alerts()
+        step = SecurityPracticesWorkflowConfigFile.I.step_check_alerts()
         assert shlex.split(step["run"].replace("\\\n", "")) == [
             "gh",
             "api",
@@ -107,13 +117,13 @@ class TestScorecardWorkflowConfigFile:
 
     def test_step_upload_sarif(self) -> None:
         """Test method."""
-        assert ScorecardWorkflowConfigFile.I.step_upload_sarif()["with"] == {
+        assert SecurityPracticesWorkflowConfigFile.I.step_upload_sarif()["with"] == {
             "sarif_file": "scorecard.sarif",
         }
 
     def test_steps_analyze(self) -> None:
         """Test method."""
-        workflow = ScorecardWorkflowConfigFile.I
+        workflow = SecurityPracticesWorkflowConfigFile.I
         steps = workflow.steps_analyze()
         assert [step["id"] for step in steps] == [
             "checkout-repository",
@@ -123,11 +133,11 @@ class TestScorecardWorkflowConfigFile:
 
     def test_steps_check_alerts(self) -> None:
         """Test method."""
-        workflow = ScorecardWorkflowConfigFile.I
+        workflow = SecurityPracticesWorkflowConfigFile.I
         assert workflow.steps_check_alerts() == [workflow.step_check_alerts()]
 
     def test_workflow_triggers(self) -> None:
         """Test method."""
-        assert ScorecardWorkflowConfigFile.I.workflow_triggers() == {
+        assert SecurityPracticesWorkflowConfigFile.I.workflow_triggers() == {
             "workflow_call": {},
         }
