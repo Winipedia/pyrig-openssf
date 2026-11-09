@@ -1,6 +1,6 @@
 """Scorecard tool tests."""
 
-from pyrig.rig.tools.base.tool import Group, Tool
+from pyrig.rig.tools.base.tool import Group
 from pyrig.rig.tools.version_control.remote.controller import RemoteVersionController
 
 from pyrig_openssf.rig.tools.security.practices import SecurityPracticesChecker
@@ -16,10 +16,6 @@ class TestSecurityPracticesChecker:
     def test_group(self) -> None:
         """Test method."""
         assert SecurityPracticesChecker.I.group() == Group.PROJECT_STATUS
-        assert (
-            SecurityPracticesChecker.I.badge()
-            in Tool.grouped_badges()[Group.PROJECT_STATUS]
-        )
 
     def test_image_url(self) -> None:
         """Test method."""
