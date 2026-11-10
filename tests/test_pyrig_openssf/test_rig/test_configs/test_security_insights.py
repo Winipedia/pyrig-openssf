@@ -29,12 +29,18 @@ from pyrig.rig.tools.version_control.remote.controller import RemoteVersionContr
 from pyrig_openssf.rig.configs.security_insights import SecurityInsightsConfigFile
 
 
-def test_using_latest_schema_version() -> None:
+def test_using_latest_schema_version(
+    *,
+    on_linux_and_latest_python_version_or_not_in_ci: bool,
+) -> None:
     """Test that the header uses the latest schema version."""
+    if not on_linux_and_latest_python_version_or_not_in_ci:
+        return
     response = requests.get(
         "https://api.github.com/repos/ossf/security-insights/releases/latest",
         timeout=30,
     )
+    response.raise_for_status()
     latest_version = response.json()["tag_name"].removeprefix("v")
     header_version = SecurityInsightsConfigFile.I.header()["schema-version"]
     assert header_version == latest_version
