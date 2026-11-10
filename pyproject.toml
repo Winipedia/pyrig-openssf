@@ -1,6 +1,6 @@
 [project]
 name = "pyrig-openssf"
-version = "0.7.4"
+version = "0.8.0"
 description = "A pyrig plugin that integrates OpenSSF functionality."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -27,7 +27,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "pyrig>=19.22.10",
+  "pyrig>=19.23.0",
 ]
 
 [project.urls]
