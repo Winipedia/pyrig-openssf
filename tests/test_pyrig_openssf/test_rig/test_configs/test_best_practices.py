@@ -169,6 +169,13 @@ class TestBestPracticesConfigFile:
         assert isinstance(justification, str)
         assert justification.strip()
 
+    def test_justification_crypto_password_storage(self) -> None:
+        """Test justification_crypto_password_storage."""
+        config = BestPracticesConfigFile.I
+        justification = config.justification_crypto_password_storage()
+        assert isinstance(justification, str)
+        assert justification.strip()
+
     def test_justification_crypto_published(self) -> None:
         """Test justification_crypto_published."""
         config = BestPracticesConfigFile.I
@@ -845,6 +852,13 @@ class TestBestPracticesConfigFile:
         """Test justification_sites_https."""
         config = BestPracticesConfigFile.I
         justification = config.justification_sites_https()
+        assert isinstance(justification, str)
+        assert justification.strip()
+
+    def test_justification_sites_password_security(self) -> None:
+        """Test justification_sites_password_security."""
+        config = BestPracticesConfigFile.I
+        justification = config.justification_sites_password_security()
         assert isinstance(justification, str)
         assert justification.strip()
 

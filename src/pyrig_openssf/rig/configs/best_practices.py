@@ -106,6 +106,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             self.justification_crypto_call,
             self.justification_crypto_certificate_verification,
             self.justification_crypto_keylength,
+            self.justification_crypto_password_storage,
             self.justification_crypto_published,
             self.justification_crypto_random,
             self.justification_crypto_tls12,
@@ -203,6 +204,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             self.justification_report_tracker,
             self.justification_roles_responsibilities,
             self.justification_sites_https,
+            self.justification_sites_password_security,
             self.justification_static_analysis,
             self.justification_static_analysis_common_vulnerabilities,
             self.justification_static_analysis_fixed,
@@ -389,6 +391,16 @@ class BestPracticesConfigFile(JSONDictConfigFile):
 
     def justification_crypto_keylength(self) -> str:
         """Use sufficiently strong default keys and allow disabling weaker ones."""
+        hooks_url = RemoteVersionController.I.file_url(
+            VersionControlHookManagerConfigFile.I.path(),
+        )
+        health_url = RemoteVersionController.I.file_url(
+            HealthCheckWorkflowConfigFile.I.path(),
+        )
+        return f"See {hooks_url} and {health_url}."
+
+    def justification_crypto_password_storage(self) -> str:
+        """Propose secure password hashing when the project accepts user passwords."""
         hooks_url = RemoteVersionController.I.file_url(
             VersionControlHookManagerConfigFile.I.path(),
         )
@@ -1247,6 +1259,13 @@ class BestPracticesConfigFile(JSONDictConfigFile):
 
     def justification_sites_https(self) -> str:
         """Show that project sites support HTTPS."""
+        repo_url = RemoteVersionController.I.repo_url()
+        docs_url = DocsBuilder.I.documentation_url()
+        releases_url = RemoteVersionController.I.releases_url()
+        return f"See {repo_url}, {docs_url}, and {releases_url}."
+
+    def justification_sites_password_security(self) -> str:
+        """Propose password security based on the project's hosted services."""
         repo_url = RemoteVersionController.I.repo_url()
         docs_url = DocsBuilder.I.documentation_url()
         releases_url = RemoteVersionController.I.releases_url()
