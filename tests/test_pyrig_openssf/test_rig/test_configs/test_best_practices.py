@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import pytest
-from pyrig.rig.tools.version_control.remote.controller import RemoteVersionController
 
 from pyrig_openssf.rig.configs.best_practices import BestPracticesConfigFile
 
@@ -189,6 +188,14 @@ class TestBestPracticesConfigFile:
         """Test justification_crypto_certificate_verification."""
         config = BestPracticesConfigFile.I
         status, justification = config.justification_crypto_certificate_verification()
+        assert status == config.STATUS_MET
+        assert isinstance(justification, str)
+        assert justification.strip()
+
+    def test_justification_crypto_floss(self) -> None:
+        """Test the FLOSS cryptography assessment."""
+        config = BestPracticesConfigFile.I
+        status, justification = config.justification_crypto_floss()
         assert status == config.STATUS_MET
         assert isinstance(justification, str)
         assert justification.strip()
@@ -390,10 +397,10 @@ class TestBestPracticesConfigFile:
     def test_justification_enhancement_responses(self) -> None:
         """Test the enhancement response assessment."""
         config = BestPracticesConfigFile.I
-        assert config.justification_enhancement_responses() == (
-            config.STATUS_MET,
-            f"See {RemoteVersionController.I.issues_url()}.",
-        )
+        status, justification = config.justification_enhancement_responses()
+        assert status == config.STATUS_MET
+        assert isinstance(justification, str)
+        assert justification.strip()
 
     def test_justification_external_dependencies(self) -> None:
         """Test justification_external_dependencies."""

@@ -108,6 +108,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             self.justification_copyright_per_file,
             self.justification_crypto_call,
             self.justification_crypto_certificate_verification,
+            self.justification_crypto_floss,
             self.justification_crypto_keylength,
             self.justification_crypto_password_storage,
             self.justification_crypto_published,
@@ -398,6 +399,13 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             HealthCheckWorkflowConfigFile.I.path(),
         )
         return self.STATUS_MET, f"See {hooks_url} and {health_url}."
+
+    def justification_crypto_floss(self) -> tuple[str, str]:
+        """Assess whether cryptographic functionality is implementable using FLOSS."""
+        repo_url = RemoteVersionController.I.repo_url()
+        config_url = RemoteVersionController.I.file_url(PyprojectConfigFile.I.path())
+        lock_url = RemoteVersionController.I.file_url(PackageManager.I.lock_file())
+        return self.STATUS_MET, f"See {repo_url}, {config_url}, and {lock_url}."
 
     def justification_crypto_keylength(self) -> tuple[str, str]:
         """Assess cryptographic key lengths."""

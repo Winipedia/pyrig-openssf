@@ -37,6 +37,8 @@
   "crypto_call_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/prek.toml and https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/health-check.yml.",
   "crypto_certificate_verification_status": "Met",
   "crypto_certificate_verification_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/prek.toml and https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/health-check.yml.",
+  "crypto_floss_status": "Met",
+  "crypto_floss_justification": "See https://github.com/Winipedia/pyrig-openssf, https://github.com/Winipedia/pyrig-openssf/blob/main/pyproject.toml, and https://github.com/Winipedia/pyrig-openssf/blob/main/uv.lock.",
   "crypto_keylength_status": "Met",
   "crypto_keylength_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/prek.toml and https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/health-check.yml.",
   "crypto_password_storage_status": "Met",
