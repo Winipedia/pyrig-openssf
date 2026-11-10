@@ -148,6 +148,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             self.justification_license_per_file,
             self.justification_maintained,
             self.justification_no_leaked_credentials,
+            self.justification_osps_ac_01_01,
             self.justification_osps_ac_02_01,
             self.justification_osps_ac_03_01,
             self.justification_osps_ac_03_02,
@@ -736,6 +737,16 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             HealthCheckWorkflowConfigFile.I.path(),
         )
         return self.STATUS_MET, f"See {hooks_url} and {health_url}."
+
+    def justification_osps_ac_01_01(self) -> tuple[str, str]:
+        """Assess multi-factor authentication for sensitive repository access."""
+        repo_url = RemoteVersionController.I.repo_url()
+        docs_url = (
+            "https://docs.github.com/en/authentication/"
+            "securing-your-account-with-two-factor-authentication-2fa/"
+            "about-mandatory-two-factor-authentication"
+        )
+        return self.STATUS_MET, f"See {repo_url} and {docs_url}."
 
     def justification_osps_ac_02_01(self) -> tuple[str, str]:
         """Assign new collaborators' repository permissions manually."""

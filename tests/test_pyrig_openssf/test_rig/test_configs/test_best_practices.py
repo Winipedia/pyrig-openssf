@@ -513,6 +513,14 @@ class TestBestPracticesConfigFile:
         assert isinstance(justification, str)
         assert justification.strip()
 
+    def test_justification_osps_ac_01_01(self) -> None:
+        """Test the repository multi-factor authentication assessment."""
+        config = BestPracticesConfigFile.I
+        status, justification = config.justification_osps_ac_01_01()
+        assert status == config.STATUS_MET
+        assert isinstance(justification, str)
+        assert justification.strip()
+
     def test_justification_osps_ac_02_01(self) -> None:
         """Test justification_osps_ac_02_01."""
         config = BestPracticesConfigFile.I
