@@ -85,6 +85,8 @@
   "dynamic_analysis_unsafe_justification": "See https://github.com/Winipedia/pyrig-openssf and https://github.com/Winipedia/pyrig-openssf/blob/main/pyproject.toml.",
   "english_status": "Met",
   "english_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/CONTRIBUTING.md and https://github.com/Winipedia/pyrig-openssf/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml.",
+  "enhancement_responses_status": "Met",
+  "enhancement_responses_justification": "See https://github.com/Winipedia/pyrig-openssf/issues.",
   "external_dependencies_status": "Met",
   "external_dependencies_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/pyproject.toml and https://github.com/Winipedia/pyrig-openssf/blob/main/uv.lock.",
   "floss_license_status": "Met",

@@ -132,6 +132,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             self.justification_dynamic_analysis_fixed,
             self.justification_dynamic_analysis_unsafe,
             self.justification_english,
+            self.justification_enhancement_responses,
             self.justification_external_dependencies,
             self.justification_floss_license,
             self.justification_floss_license_osi,
@@ -613,6 +614,11 @@ class BestPracticesConfigFile(JSONDictConfigFile):
         )
         report_url = RemoteVersionController.I.file_url(BugReportConfigFile.I.path())
         return self.STATUS_MET, f"See {contributing_url} and {report_url}."
+
+    def justification_enhancement_responses(self) -> tuple[str, str]:
+        """Assess responsiveness to enhancement requests."""
+        url = RemoteVersionController.I.issues_url()
+        return self.STATUS_MET, f"See {url}."
 
     def justification_external_dependencies(self) -> tuple[str, str]:
         """Show that dependencies are listed in a machine-readable format."""
