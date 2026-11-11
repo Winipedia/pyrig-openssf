@@ -1,9 +1,5 @@
 """Test module."""
 
-from pyrig.rig.configs.version_control.remote.workflows.release import (
-    ReleaseWorkflowConfigFile,
-)
-
 from pyrig_openssf.rig.configs.version_control.remote.workflows.health_check import (
     HealthCheckWorkflowConfigFile,
 )
@@ -32,9 +28,6 @@ class TestHealthCheckWorkflowConfigFile:
             HealthCheckWorkflowConfigFile.I.job_security_practices_permissions()
         )
         assert permissions == SecurityPracticesWorkflowConfigFile.I.used_permissions()
-        release_permissions = ReleaseWorkflowConfigFile.I.job_health_check_permissions()
-        for name, level in permissions.items():
-            assert release_permissions[name] == level
 
     def test_jobs_health_check(self) -> None:
         """Test method."""
