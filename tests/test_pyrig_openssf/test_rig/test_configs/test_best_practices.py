@@ -633,6 +633,14 @@ class TestBestPracticesConfigFile:
         assert isinstance(justification, str)
         assert justification.strip()
 
+    def test_justification_osps_br_06_01(self) -> None:
+        """Test the release artifact signing assessment."""
+        config = BestPracticesConfigFile.I
+        status, justification = config.justification_osps_br_06_01()
+        assert status == config.STATUS_UNMET
+        assert isinstance(justification, str)
+        assert justification.strip()
+
     def test_justification_osps_br_07_01(self) -> None:
         """Test justification_osps_br_07_01."""
         config = BestPracticesConfigFile.I

@@ -147,6 +147,8 @@
   "osps_br_04_01_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/release.yml.",
   "osps_br_05_01_status": "Met",
   "osps_br_05_01_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/health-check.yml.",
+  "osps_br_06_01_status": "Unmet",
+  "osps_br_06_01_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/release.yml and https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/deploy.yml.",
   "osps_br_07_01_status": "Met",
   "osps_br_07_01_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/prek.toml and https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/health-check.yml.",
   "osps_do_01_01_status": "Met",

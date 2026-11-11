@@ -163,6 +163,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             self.justification_osps_br_03_02,
             self.justification_osps_br_04_01,
             self.justification_osps_br_05_01,
+            self.justification_osps_br_06_01,
             self.justification_osps_br_07_01,
             self.justification_osps_do_01_01,
             self.justification_osps_do_02_01,
@@ -892,6 +893,16 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             HealthCheckWorkflowConfigFile.I.path(),
         )
         return self.STATUS_MET, f"See {url}."
+
+    def justification_osps_br_06_01(self) -> tuple[str, str]:
+        """Assess release artifact signing."""
+        release_url = RemoteVersionController.I.file_url(
+            ReleaseWorkflowConfigFile.I.path(),
+        )
+        deploy_url = RemoteVersionController.I.file_url(
+            DeployWorkflowConfigFile.I.path(),
+        )
+        return self.STATUS_UNMET, f"See {release_url} and {deploy_url}."
 
     def justification_osps_br_07_01(self) -> tuple[str, str]:
         """Show that mechanisms prevent accidental credential commits."""
