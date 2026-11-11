@@ -22,15 +22,7 @@ class HealthCheckWorkflowConfigFile(BaseHealthCheckWorkflowConfigFile):
 
     def job_security_practices(self) -> dict[str, Any]:
         """Call the reusable security-practices workflow."""
-        return self.job(
+        return self.job_workflow_call(
             self.job_security_practices,
-            uses=SecurityPracticesWorkflowConfigFile.I.workflow_call_reference(),
-            permissions=self.job_security_practices_permissions() or None,
-            secrets=(
-                SecurityPracticesWorkflowConfigFile.I.used_secrets_mapping() or None
-            ),
+            workflow=SecurityPracticesWorkflowConfigFile,
         )
-
-    def job_security_practices_permissions(self) -> dict[str, str]:
-        """Return the permissions required by the security-practices workflow."""
-        return SecurityPracticesWorkflowConfigFile.I.used_permissions()

@@ -20,14 +20,12 @@ class TestHealthCheckWorkflowConfigFile:
             job["uses"]
             == SecurityPracticesWorkflowConfigFile.I.workflow_call_reference()
         )
-        assert job["permissions"] == workflow.job_security_practices_permissions()
-
-    def test_job_security_practices_permissions(self) -> None:
-        """Test method."""
-        permissions = (
-            HealthCheckWorkflowConfigFile.I.job_security_practices_permissions()
+        assert job["permissions"] == (
+            SecurityPracticesWorkflowConfigFile.I.used_permissions()
         )
-        assert permissions == SecurityPracticesWorkflowConfigFile.I.used_permissions()
+        assert job.get("secrets") == (
+            SecurityPracticesWorkflowConfigFile.I.used_secrets_mapping() or None
+        )
 
     def test_jobs_health_check(self) -> None:
         """Test method."""
