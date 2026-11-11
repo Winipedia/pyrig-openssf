@@ -52,3 +52,41 @@
 > A pyrig plugin that integrates OpenSSF functionality.
 
 ---
+
+## Overview
+
+`pyrig-openssf` is a [pyrig](https://github.com/Winipedia/pyrig) plugin that adds
+OpenSSF Scorecard analysis and generates security metadata for your project.
+
+## What it adds
+
+- **Scorecard analysis** - checks repository security practices and publishes
+  results to OpenSSF Scorecard and GitHub code scanning.
+- **Health-check integration** - fails the health-check workflow if the analyzed
+  ref has any open Scorecard alerts, including existing findings. Fixed and
+  dismissed alerts do not block the check.
+- **Best Practices proposals** - generates `.bestpractices.json` with proposed
+  answers and evidence links for Best Practices and Baseline assessments.
+- **Security Insights metadata** - generates `security-insights.yml` describing
+  the project, repository, security policies, and tooling.
+- **OpenSSF badges** - adds Scorecard, Best Practices, and Baseline badges.
+
+## Usage
+
+Add the plugin as a development dependency, then synchronize your project:
+
+```bash
+uv add pyrig-openssf --dev
+uv run pyrig sync
+```
+
+The plugin requires Python 3.12 or newer.
+
+Generated assessment answers are overridable proposals, not automatic
+certification. Review them before submitting an assessment. See the
+[documentation](https://Winipedia.github.io/pyrig-openssf/#setup) for badge setup.
+
+## Documentation
+
+Full documentation, including the auto-generated API reference, is available on
+the [documentation site](https://Winipedia.github.io/pyrig-openssf).
