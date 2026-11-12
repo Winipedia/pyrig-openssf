@@ -21,7 +21,7 @@ class TestBestPracticesConfigFile:
         [
             BestPracticesConfigFile.STATUS_MET,
             BestPracticesConfigFile.STATUS_UNMET,
-            BestPracticesConfigFile.STATUS_NOT_APPLICABLE,
+            BestPracticesConfigFile.STATUS_NA,
         ],
     )
     def test_criterion_config(self, status: str) -> None:
@@ -118,7 +118,7 @@ class TestBestPracticesConfigFile:
         """Test the pure-Python build default."""
         config = BestPracticesConfigFile.I
         status, justification = config.justification_build_standard_variables()
-        assert status == config.STATUS_NOT_APPLICABLE
+        assert status == config.STATUS_NA
         assert justification.strip()
 
     def test_justification_code_of_conduct(self) -> None:
@@ -382,7 +382,7 @@ class TestBestPracticesConfigFile:
         """Test the memory-safe product language default."""
         config = BestPracticesConfigFile.I
         status, justification = config.justification_dynamic_analysis_unsafe()
-        assert status == config.STATUS_NOT_APPLICABLE
+        assert status == config.STATUS_NA
         assert isinstance(justification, str)
         assert justification.strip()
 
@@ -821,14 +821,14 @@ class TestBestPracticesConfigFile:
         """Test the single-repository project default."""
         config = BestPracticesConfigFile.I
         status, justification = config.justification_osps_qa_04_01()
-        assert status == config.STATUS_NOT_APPLICABLE
+        assert status == config.STATUS_NA
         assert justification.strip()
 
     def test_justification_osps_qa_04_02(self) -> None:
         """Test the single-repository release default."""
         config = BestPracticesConfigFile.I
         status, justification = config.justification_osps_qa_04_02()
-        assert status == config.STATUS_NOT_APPLICABLE
+        assert status == config.STATUS_NA
         assert isinstance(justification, str)
         assert justification.strip()
 
@@ -965,6 +965,14 @@ class TestBestPracticesConfigFile:
         config = BestPracticesConfigFile.I
         status, justification = config.justification_release_notes()
         assert status == config.STATUS_MET
+        assert isinstance(justification, str)
+        assert justification.strip()
+
+    def test_justification_release_notes_vulns(self) -> None:
+        """Check the default vulnerability release-notes assessment."""
+        config = BestPracticesConfigFile.I
+        status, justification = config.justification_release_notes_vulns()
+        assert status == config.STATUS_NA
         assert isinstance(justification, str)
         assert justification.strip()
 

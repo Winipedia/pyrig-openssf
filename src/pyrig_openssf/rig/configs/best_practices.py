@@ -63,7 +63,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
 
     STATUS_MET = "Met"
     STATUS_UNMET = "Unmet"
-    STATUS_NOT_APPLICABLE = "N/A"
+    STATUS_NA = "N/A"
 
     @override
     def parent_path(self) -> Path:
@@ -215,6 +215,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             self.justification_osps_vm_06_02,
             self.justification_regression_tests_added50,
             self.justification_release_notes,
+            self.justification_release_notes_vulns,
             self.justification_repo_distributed,
             self.justification_repo_interim,
             self.justification_repo_public,
@@ -329,7 +330,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
     def justification_build_standard_variables(self) -> tuple[str, str]:
         """Assess support for standard compiler and linker variables."""
         url = RemoteVersionController.I.file_url(PyprojectConfigFile.I.path())
-        return self.STATUS_NOT_APPLICABLE, f"See {url}."
+        return self.STATUS_NA, f"See {url}."
 
     def justification_code_of_conduct(self) -> tuple[str, str]:
         """Show that the project adopts and publishes a code of conduct."""
@@ -625,7 +626,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
         """Assess dynamic analysis of memory-unsafe code."""
         repo_url = RemoteVersionController.I.repo_url()
         pyproject_url = RemoteVersionController.I.file_url(PyprojectConfigFile.I.path())
-        return self.STATUS_NOT_APPLICABLE, f"See {repo_url} and {pyproject_url}."
+        return self.STATUS_NA, f"See {repo_url} and {pyproject_url}."
 
     def justification_english(self) -> tuple[str, str]:
         """Show that documentation and bug reporting support English."""
@@ -1150,7 +1151,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
     def justification_osps_qa_04_01(self) -> tuple[str, str]:
         """Assess documentation of project code repositories."""
         url = RemoteVersionController.I.repo_url()
-        return self.STATUS_NOT_APPLICABLE, f"See {url}."
+        return self.STATUS_NA, f"See {url}."
 
     def justification_osps_qa_04_02(self) -> tuple[str, str]:
         """Assess security requirements across release repositories."""
@@ -1158,7 +1159,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
         release_url = RemoteVersionController.I.file_url(
             ReleaseWorkflowConfigFile.I.path(),
         )
-        return self.STATUS_NOT_APPLICABLE, f"See {repo_url} and {release_url}."
+        return self.STATUS_NA, f"See {repo_url} and {release_url}."
 
     def justification_osps_qa_05_01(self) -> tuple[str, str]:
         """Keep generated executables out of version control."""
@@ -1351,6 +1352,13 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             ReleaseWorkflowConfigFile.I.path(),
         )
         return self.STATUS_MET, f"See {release_url}."
+
+    def justification_release_notes_vulns(self) -> tuple[str, str]:
+        """Default to no publicly known project vulnerabilities; review per project."""
+        return (
+            self.STATUS_NA,
+            "No publicly known project vulnerabilities were found",
+        )
 
     def justification_repo_distributed(self) -> tuple[str, str]:
         """Show that the project uses distributed version control."""
