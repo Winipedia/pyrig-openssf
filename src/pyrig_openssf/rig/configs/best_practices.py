@@ -864,9 +864,21 @@ class BestPracticesConfigFile(JSONDictConfigFile):
         health_url = RemoteVersionController.I.file_url(
             HealthCheckWorkflowConfigFile.I.path(),
         )
+        repository_url = RemoteVersionController.I.file_url(
+            RepositoryWorkflowConfigFile.I.path(),
+        )
+        documentation_url = RemoteVersionController.I.file_url(
+            DocumentationWorkflowConfigFile.I.path(),
+        )
+        security_practices_url = RemoteVersionController.I.file_url(
+            SecurityPracticesWorkflowConfigFile.I.path(),
+        )
         return (
             self.STATUS_MET,
-            f"See {settings_url}, {configure_url}, and {health_url}.",
+            (
+                f"See {settings_url}, {configure_url}, {health_url}, "
+                f"{repository_url}, {documentation_url}, and {security_practices_url}."
+            ),
         )
 
     def justification_osps_br_01_04(self) -> tuple[str, str]:
@@ -929,10 +941,13 @@ class BestPracticesConfigFile(JSONDictConfigFile):
 
     def justification_osps_br_05_01(self) -> tuple[str, str]:
         """Show that pipelines use standard dependency management tools."""
-        url = RemoteVersionController.I.file_url(
+        health_url = RemoteVersionController.I.file_url(
             HealthCheckWorkflowConfigFile.I.path(),
         )
-        return self.STATUS_MET, f"See {url}."
+        documentation_url = RemoteVersionController.I.file_url(
+            DocumentationWorkflowConfigFile.I.path(),
+        )
+        return self.STATUS_MET, f"See {health_url} and {documentation_url}."
 
     def justification_osps_br_06_01(self) -> tuple[str, str]:
         """Assess release artifact signing."""
