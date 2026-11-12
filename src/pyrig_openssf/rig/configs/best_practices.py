@@ -34,15 +34,25 @@ from pyrig.rig.configs.version_control.remote.settings import (
 from pyrig.rig.configs.version_control.remote.workflows.deploy import (
     DeployWorkflowConfigFile,
 )
+from pyrig.rig.configs.version_control.remote.workflows.documentation import (
+    DocumentationWorkflowConfigFile,
+)
 from pyrig.rig.configs.version_control.remote.workflows.health_check import (
     HealthCheckWorkflowConfigFile,
 )
 from pyrig.rig.configs.version_control.remote.workflows.release import (
     ReleaseWorkflowConfigFile,
 )
+from pyrig.rig.configs.version_control.remote.workflows.repository import (
+    RepositoryWorkflowConfigFile,
+)
 from pyrig.rig.tools.docs.builder import DocsBuilder
 from pyrig.rig.tools.packages.manager import PackageManager
 from pyrig.rig.tools.version_control.remote.controller import RemoteVersionController
+
+from pyrig_openssf.rig.configs.version_control.remote.workflows.security_practices import (  # noqa: E501
+    SecurityPracticesWorkflowConfigFile,
+)
 
 if TYPE_CHECKING:
     from types import MethodType
@@ -560,10 +570,10 @@ class BestPracticesConfigFile(JSONDictConfigFile):
         contributing_url = RemoteVersionController.I.file_url(
             ContributingConfigFile.I.path(),
         )
-        deploy_url = RemoteVersionController.I.file_url(
-            DeployWorkflowConfigFile.I.path(),
+        documentation_url = RemoteVersionController.I.file_url(
+            DocumentationWorkflowConfigFile.I.path(),
         )
-        return self.STATUS_MET, f"See {contributing_url} and {deploy_url}."
+        return self.STATUS_MET, f"See {contributing_url} and {documentation_url}."
 
     def justification_documentation_interface(self) -> tuple[str, str]:
         """Document the software's external inputs and outputs."""
@@ -785,7 +795,22 @@ class BestPracticesConfigFile(JSONDictConfigFile):
         deploy_url = RemoteVersionController.I.file_url(
             DeployWorkflowConfigFile.I.path(),
         )
-        return self.STATUS_MET, f"See {health_url}, {release_url}, and {deploy_url}."
+        repository_url = RemoteVersionController.I.file_url(
+            RepositoryWorkflowConfigFile.I.path(),
+        )
+        documentation_url = RemoteVersionController.I.file_url(
+            DocumentationWorkflowConfigFile.I.path(),
+        )
+        security_practices_url = RemoteVersionController.I.file_url(
+            SecurityPracticesWorkflowConfigFile.I.path(),
+        )
+        return (
+            self.STATUS_MET,
+            (
+                f"See {health_url}, {release_url}, {deploy_url}, {repository_url}, "
+                f"{documentation_url}, and {security_practices_url}."
+            ),
+        )
 
     def justification_osps_ac_04_02(self) -> tuple[str, str]:
         """Grant each CI task only the permissions it needs."""
@@ -798,7 +823,22 @@ class BestPracticesConfigFile(JSONDictConfigFile):
         deploy_url = RemoteVersionController.I.file_url(
             DeployWorkflowConfigFile.I.path(),
         )
-        return self.STATUS_MET, f"See {health_url}, {release_url}, and {deploy_url}."
+        repository_url = RemoteVersionController.I.file_url(
+            RepositoryWorkflowConfigFile.I.path(),
+        )
+        documentation_url = RemoteVersionController.I.file_url(
+            DocumentationWorkflowConfigFile.I.path(),
+        )
+        security_practices_url = RemoteVersionController.I.file_url(
+            SecurityPracticesWorkflowConfigFile.I.path(),
+        )
+        return (
+            self.STATUS_MET,
+            (
+                f"See {health_url}, {release_url}, {deploy_url}, {repository_url}, "
+                f"{documentation_url}, and {security_practices_url}."
+            ),
+        )
 
     def justification_osps_br_01_01(self) -> tuple[str, str]:
         """Assess handling of untrusted CI input."""
