@@ -216,6 +216,14 @@ class TestBestPracticesConfigFile:
         assert isinstance(justification, str)
         assert justification.strip()
 
+    def test_justification_crypto_pfs(self) -> None:
+        """Check the proposed forward-secrecy default and repository reference."""
+        config = BestPracticesConfigFile.I
+        status, justification = config.justification_crypto_pfs()
+        assert status == config.STATUS_NA
+        assert isinstance(justification, str)
+        assert justification.strip()
+
     def test_justification_crypto_published(self) -> None:
         """Test justification_crypto_published."""
         config = BestPracticesConfigFile.I

@@ -121,6 +121,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             self.justification_crypto_floss,
             self.justification_crypto_keylength,
             self.justification_crypto_password_storage,
+            self.justification_crypto_pfs,
             self.justification_crypto_published,
             self.justification_crypto_random,
             self.justification_crypto_tls12,
@@ -439,6 +440,14 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             HealthCheckWorkflowConfigFile.I.path(),
         )
         return self.STATUS_MET, f"See {hooks_url} and {health_url}."
+
+    def justification_crypto_pfs(self) -> tuple[str, str]:
+        """Assume no key-agreement protocols; review applicability per project."""
+        url = RemoteVersionController.I.repo_url()
+        return (
+            self.STATUS_NA,
+            f"The project does not implement key-agreement protocols. See {url}.",
+        )
 
     def justification_crypto_published(self) -> tuple[str, str]:
         """Assess use of published, reviewed cryptography."""

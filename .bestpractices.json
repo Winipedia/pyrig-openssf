@@ -43,6 +43,8 @@
   "crypto_keylength_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/prek.toml and https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/health-check.yml.",
   "crypto_password_storage_status": "Met",
   "crypto_password_storage_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/prek.toml and https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/health-check.yml.",
+  "crypto_pfs_status": "N/A",
+  "crypto_pfs_justification": "The project does not implement key-agreement protocols. See https://github.com/Winipedia/pyrig-openssf.",
   "crypto_published_status": "Met",
   "crypto_published_justification": "See https://github.com/Winipedia/pyrig-openssf/blob/main/prek.toml and https://github.com/Winipedia/pyrig-openssf/blob/main/.github/workflows/health-check.yml.",
   "crypto_random_status": "Met",
