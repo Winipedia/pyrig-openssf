@@ -24,7 +24,7 @@ class TestHealthCheckWorkflowConfigFile:
             SecurityPracticesWorkflowConfigFile.I.permissions_used()
         )
         assert job.get("secrets") == (
-            SecurityPracticesWorkflowConfigFile.I.used_secrets_mapping() or None
+            SecurityPracticesWorkflowConfigFile.I.secrets_used_mapping() or None
         )
 
     def test_jobs_health_check(self) -> None:
