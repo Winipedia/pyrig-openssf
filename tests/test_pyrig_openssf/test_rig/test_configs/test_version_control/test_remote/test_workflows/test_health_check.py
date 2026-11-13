@@ -21,7 +21,7 @@ class TestHealthCheckWorkflowConfigFile:
             == SecurityPracticesWorkflowConfigFile.I.workflow_call_reference()
         )
         assert job["permissions"] == (
-            SecurityPracticesWorkflowConfigFile.I.used_permissions()
+            SecurityPracticesWorkflowConfigFile.I.permissions_used()
         )
         assert job.get("secrets") == (
             SecurityPracticesWorkflowConfigFile.I.used_secrets_mapping() or None
