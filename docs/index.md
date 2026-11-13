@@ -75,25 +75,17 @@ The plugin requires Python 3.12 or newer.
 
 ## Setup
 
-Commit and push the generated files to your public GitHub repository's default
-branch. The Scorecard workflow publishes its results publicly.
+Commit and push to your public GitHub repository's default branch. The Scorecard
+workflow publishes its results publicly.
 
-Best Practices and Baseline badges require a project entry on
-[bestpractices.dev](https://www.bestpractices.dev/en):
+The Best Practices and Baseline badges require a project entry on [bestpractices.dev](https://www.bestpractices.dev/en):
 
-1. Sign in with GitHub and create or open your project's entry.
-2. Set the project and repository URLs. The generated JSON contains assessment
-   answers, not the general project registration fields.
-3. Open the assessment section you want to complete, such as Passing or
-   Baseline Level 1.
-4. Click **Save (and continue)** to run automation, which can read the published
-   `.bestpractices.json` file.
-5. Review the proposed answers and evidence, complete remaining questions, and
-   save the assessment. Repeat for other sections as needed.
+1. Sign in with GitHub at [bestpractices.dev](https://www.bestpractices.dev/en/projects/new).
+2. Create or open your project's entry.
+3. Review the generated assessment proposals and fill in any missing information.
+4. Submit the assessment once all required information is provided.
 
-The generated badges look up the project by repository URL, so no assessment ID
-needs to be configured in the plugin. Adding a badge does not award it:
-the assessment must meet the corresponding criteria.
+After completion, the badges should reflect the submitted assessment.
 
 ## Reusable Security Practices workflow
 
