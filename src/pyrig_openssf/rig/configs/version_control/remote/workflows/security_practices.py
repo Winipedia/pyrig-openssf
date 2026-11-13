@@ -34,7 +34,7 @@ class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
         return self.job(
             self.job_check_alerts,
             needs=(self.job_analyze,),
-            permissions=self.job_check_alerts_permissions(),
+            permissions=self.permissions_job_check_alerts(),
             steps=self.steps_check_alerts(),
             timeout_minutes=5,
         )
@@ -43,12 +43,12 @@ class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
         """Build the isolated analysis and upload job."""
         return self.job(
             self.job_analyze,
-            permissions=self.job_analyze_permissions(),
+            permissions=self.permissions_job_analyze(),
             steps=self.steps_analyze(),
             timeout_minutes=30,
         )
 
-    def job_check_alerts_permissions(self) -> dict[str, str]:
+    def permissions_job_check_alerts(self) -> dict[str, str]:
         """Grant read access to code-scanning alerts without OIDC."""
         return self.permission("security-events")
 
@@ -56,7 +56,7 @@ class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
         """Return the code-scanning alert check."""
         return [self.step_check_alerts()]
 
-    def job_analyze_permissions(self) -> dict[str, str]:
+    def permissions_job_analyze(self) -> dict[str, str]:
         """Grant repository reads, SARIF upload, and publication signing."""
         return {
             **self.permission_contents(),

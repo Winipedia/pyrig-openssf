@@ -40,21 +40,12 @@ class TestSecurityPracticesWorkflowConfigFile:
         assert job["job_id"] == "analyze"
         assert job["runs-on"] == "ubuntu-latest"
         assert job["timeout-minutes"] == 30  # noqa: PLR2004
-        assert job["permissions"] == workflow.job_analyze_permissions()
+        assert job["permissions"] == workflow.permissions_job_analyze()
         assert [step["id"] for step in job["steps"]] == [
             "checkout-repository",
             "analyze-scorecard",
             "upload-sarif",
         ]
-
-    def test_job_analyze_permissions(self) -> None:
-        """Test method."""
-        assert SecurityPracticesWorkflowConfigFile.I.job_analyze_permissions() == {
-            "contents": "read",
-            "actions": "read",
-            "security-events": "write",
-            "id-token": "write",
-        }
 
     def test_job_check_alerts(self) -> None:
         """Test method."""
@@ -63,19 +54,28 @@ class TestSecurityPracticesWorkflowConfigFile:
         assert job["job_id"] == "check-alerts"
         assert job["needs"] == ["analyze"]
         assert job["timeout-minutes"] == 5  # noqa: PLR2004
-        assert job["permissions"] == workflow.job_check_alerts_permissions()
+        assert job["permissions"] == workflow.permissions_job_check_alerts()
         assert job["steps"] == workflow.steps_check_alerts()
-
-    def test_job_check_alerts_permissions(self) -> None:
-        """Test method."""
-        assert SecurityPracticesWorkflowConfigFile.I.job_check_alerts_permissions() == {
-            "security-events": "read",
-        }
 
     def test_jobs(self) -> None:
         """Test method."""
         workflow = SecurityPracticesWorkflowConfigFile.I
         assert workflow.jobs() == (workflow.job_analyze, workflow.job_check_alerts)
+
+    def test_permissions_job_analyze(self) -> None:
+        """Test method."""
+        assert SecurityPracticesWorkflowConfigFile.I.permissions_job_analyze() == {
+            "contents": "read",
+            "actions": "read",
+            "security-events": "write",
+            "id-token": "write",
+        }
+
+    def test_permissions_job_check_alerts(self) -> None:
+        """Test method."""
+        assert SecurityPracticesWorkflowConfigFile.I.permissions_job_check_alerts() == {
+            "security-events": "read",
+        }
 
     def test_results_file(self) -> None:
         """Test method."""
