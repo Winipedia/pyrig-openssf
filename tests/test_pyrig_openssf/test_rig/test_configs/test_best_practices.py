@@ -434,6 +434,14 @@ class TestBestPracticesConfigFile:
         assert isinstance(justification, str)
         assert justification.strip()
 
+    def test_justification_governance(self) -> None:
+        """Test the governance proposal and its generated assessment fields."""
+        config = BestPracticesConfigFile.I
+        status, justification = config.justification_governance()
+        assert status == config.STATUS_MET
+        assert isinstance(justification, str)
+        assert justification.strip()
+
     def test_justification_installation_common(self) -> None:
         """Test justification_installation_common."""
         config = BestPracticesConfigFile.I

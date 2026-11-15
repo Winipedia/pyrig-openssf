@@ -148,6 +148,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
             self.justification_external_dependencies,
             self.justification_floss_license,
             self.justification_floss_license_osi,
+            self.justification_governance,
             self.justification_installation_common,
             self.justification_installation_development_quick,
             self.justification_installation_standard_variables,
@@ -664,6 +665,11 @@ class BestPracticesConfigFile(JSONDictConfigFile):
     def justification_floss_license_osi(self) -> tuple[str, str]:
         """Show that the software uses an OSI-approved license."""
         url = RemoteVersionController.I.file_url(LicenseConfigFile.I.path())
+        return self.STATUS_MET, f"See {url}."
+
+    def justification_governance(self) -> tuple[str, str]:
+        """Propose governance based on the contribution guide."""
+        url = RemoteVersionController.I.file_url(ContributingConfigFile.I.path())
         return self.STATUS_MET, f"See {url}."
 
     def justification_installation_common(self) -> tuple[str, str]:
