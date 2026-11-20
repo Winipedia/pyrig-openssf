@@ -6,8 +6,10 @@ from pyrig.rig.configs.base.config_file import ConfigFile
 from pyrig.rig.configs.base.workflow import WorkflowConfigFile
 from pyrig.rig.tools.base.tool import Tool
 
-from pyrig_openssf.rig.configs.best_practices import BestPracticesConfigFile
-from pyrig_openssf.rig.configs.security_insights import SecurityInsightsConfigFile
+from pyrig_openssf.rig.configs.security.best_practices import BestPracticesConfigFile
+from pyrig_openssf.rig.configs.security.security_insights import (
+    SecurityInsightsConfigFile,
+)
 
 _CONFIG_FILE_OVERRIDES = (
     ConfigFile._configs,  # noqa: SLF001

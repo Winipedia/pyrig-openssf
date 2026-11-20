@@ -13,7 +13,7 @@ class SecretsChecker(BaseSecretsChecker):
     @override
     def check_hook(self) -> dict[str, Any]:
         """Exclude only the generated Best Practices assessment file."""
-        from pyrig_openssf.rig.configs.best_practices import (  # noqa: PLC0415
+        from pyrig_openssf.rig.configs.security.best_practices import (  # noqa: PLC0415
             BestPracticesConfigFile,
         )
 

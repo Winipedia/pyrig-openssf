@@ -4,7 +4,7 @@ import re
 
 from pyrig.rig.tools.security.secrets import SecretsChecker as BaseSecretsChecker
 
-from pyrig_openssf.rig.configs.best_practices import BestPracticesConfigFile
+from pyrig_openssf.rig.configs.security.best_practices import BestPracticesConfigFile
 from pyrig_openssf.rig.tools.security.secrets import SecretsChecker
 
 

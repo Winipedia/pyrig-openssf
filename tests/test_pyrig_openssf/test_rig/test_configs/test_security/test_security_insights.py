@@ -26,7 +26,9 @@ from pyrig.rig.tools.packages.manager import PackageManager
 from pyrig.rig.tools.version_control.controller import VersionController
 from pyrig.rig.tools.version_control.remote.controller import RemoteVersionController
 
-from pyrig_openssf.rig.configs.security_insights import SecurityInsightsConfigFile
+from pyrig_openssf.rig.configs.security.security_insights import (
+    SecurityInsightsConfigFile,
+)
 
 
 def test_using_latest_schema_version(
