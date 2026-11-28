@@ -2,8 +2,9 @@
 
 from collections.abc import Callable
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, cast, override
+from typing import Any, override
 
+from pyrig.core.strings import normalize_func_name
 from pyrig.rig.configs.base.json import JSONDictConfigFile
 from pyrig.rig.configs.community.code_of_conduct import CodeOfConductConfigFile
 from pyrig.rig.configs.community.contributing import ContributingConfigFile
@@ -53,9 +54,6 @@ from pyrig.rig.tools.version_control.remote.controller import RemoteVersionContr
 from pyrig_openssf.rig.configs.version_control.remote.workflows.security_practices import (  # noqa: E501
     SecurityPracticesWorkflowConfigFile,
 )
-
-if TYPE_CHECKING:
-    from types import MethodType
 
 
 class BestPracticesConfigFile(JSONDictConfigFile):
@@ -263,7 +261,7 @@ class BestPracticesConfigFile(JSONDictConfigFile):
 
     def criterion_from_method(self, method: Callable[[], tuple[str, str]]) -> str:
         """Return the criterion identifier from a `justification_*` method."""
-        return cast("MethodType", method).__name__.removeprefix("justification_")
+        return normalize_func_name(method).removeprefix("justification_")
 
     def justification_accessibility_best_practices(self) -> tuple[str, str]:
         """Propose accessibility based on the project site and documentation."""

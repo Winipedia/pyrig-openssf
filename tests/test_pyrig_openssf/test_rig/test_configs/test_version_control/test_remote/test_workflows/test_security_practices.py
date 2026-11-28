@@ -19,7 +19,7 @@ class TestSecurityPracticesWorkflowConfigFile:
         """Test method."""
         workflow = SecurityPracticesWorkflowConfigFile.I
         assert workflow.action_scorecard() == tuple(
-            resource_content("ACTION_SCORECARD", resources).splitlines(),
+            resource_content("action_scorecard", resources).splitlines(),
         )
         action, ref, tag = workflow.action_scorecard()
         assert f'"uses": "{action}@{ref}"  # {tag}' in read_text_utf8(workflow.path())
@@ -28,7 +28,7 @@ class TestSecurityPracticesWorkflowConfigFile:
         """Test method."""
         workflow = SecurityPracticesWorkflowConfigFile.I
         assert workflow.action_upload_sarif() == tuple(
-            resource_content("ACTION_UPLOAD_SARIF", resources).splitlines(),
+            resource_content("action_upload_sarif", resources).splitlines(),
         )
         action, ref, tag = workflow.action_upload_sarif()
         assert f'"uses": "{action}@{ref}"  # {tag}' in read_text_utf8(workflow.path())
