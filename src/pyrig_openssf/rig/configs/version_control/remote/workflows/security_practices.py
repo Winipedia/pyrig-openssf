@@ -32,7 +32,6 @@ class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
     def job_check_alerts(self) -> dict[str, Any]:
         """Check alerts after the uploaded analysis has been processed."""
         return self.job(
-            self.job_check_alerts,
             needs=(self.job_analyze,),
             permissions=self.permissions_job_check_alerts(),
             steps=self.steps_check_alerts(),
@@ -42,7 +41,6 @@ class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
     def job_analyze(self) -> dict[str, Any]:
         """Build the isolated analysis and upload job."""
         return self.job(
-            self.job_analyze,
             permissions=self.permissions_job_analyze(),
             steps=self.steps_analyze(),
             timeout_minutes=30,
@@ -52,9 +50,9 @@ class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
         """Grant read access to code-scanning alerts without OIDC."""
         return self.permission("security-events")
 
-    def steps_check_alerts(self) -> list[dict[str, Any]]:
+    def steps_check_alerts(self) -> tuple[Callable[[], dict[str, Any]], ...]:
         """Return the code-scanning alert check."""
-        return [self.step_check_alerts()]
+        return (self.step_check_alerts,)
 
     def permissions_job_analyze(self) -> dict[str, str]:
         """Grant repository reads, SARIF upload, and publication signing."""
@@ -68,7 +66,6 @@ class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
     def step_check_alerts(self) -> dict[str, Any]:
         """Fail on open Scorecard alerts for the analyzed ref or API errors."""
         return self.step(
-            self.step_check_alerts,
             run=RemoteVersionController.I.api_method_args(
                 '--raw-field="ref=${GITHUB_REF}"',
                 "--raw-field=state=open",
@@ -80,18 +77,17 @@ class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
             env={"GH_TOKEN": self.insert_github_token()},
         )
 
-    def steps_analyze(self) -> list[dict[str, Any]]:
+    def steps_analyze(self) -> tuple[Callable[[], dict[str, Any]], ...]:
         """Return checkout, analysis, and code-scanning upload steps."""
-        return [
-            self.step_checkout_repository(),
-            self.step_analyze_scorecard(),
-            self.step_upload_sarif(),
-        ]
+        return (
+            self.step_checkout_repository,
+            self.step_analyze_scorecard,
+            self.step_upload_sarif,
+        )
 
     def step_analyze_scorecard(self) -> dict[str, Any]:
         """Run Scorecard with public publication enabled."""
         return self.step(
-            self.step_analyze_scorecard,
             uses=self.action_scorecard(),
             with_={
                 "results_file": self.results_file().as_posix(),
@@ -103,7 +99,6 @@ class SecurityPracticesWorkflowConfigFile(WorkflowConfigFile):
     def step_upload_sarif(self) -> dict[str, Any]:
         """Upload Scorecard results and wait for code-scanning processing."""
         return self.step(
-            self.step_upload_sarif,
             uses=self.action_upload_sarif(),
             with_={
                 "sarif_file": self.results_file().as_posix(),

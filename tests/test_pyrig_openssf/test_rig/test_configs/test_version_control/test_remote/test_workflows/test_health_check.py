@@ -14,8 +14,9 @@ class TestHealthCheckWorkflowConfigFile:
     def test_job_security_practices(self) -> None:
         """Test method."""
         workflow = HealthCheckWorkflowConfigFile.I
-        job = workflow.job_security_practices()
-        assert job["job_id"] == "security-practices"
+        job = workflow.job_as_dict(workflow.job_security_practices)[
+            "security-practices"
+        ]
         assert (
             job["uses"]
             == SecurityPracticesWorkflowConfigFile.I.workflow_call_reference()

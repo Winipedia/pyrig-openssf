@@ -23,6 +23,5 @@ class HealthCheckWorkflowConfigFile(BaseHealthCheckWorkflowConfigFile):
     def job_security_practices(self) -> dict[str, Any]:
         """Call the reusable security-practices workflow."""
         return self.job_workflow_call(
-            self.job_security_practices,
             workflow=SecurityPracticesWorkflowConfigFile,
         )
